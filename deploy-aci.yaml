@@ -4,7 +4,7 @@
 
 apiVersion: 2023-05-01
 location: westeurope
-name: paulineContainerGroupPortfolio-dev
+name: paulineContainerGroupPortfolio
 properties:
   imageRegistryCredentials:
       - server: paulineregistreb15.azurecr.io

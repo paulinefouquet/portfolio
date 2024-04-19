@@ -89,7 +89,7 @@ jobs:
         include: 'deploy-aci.yaml'
     
     - name: Delete Previous Same Container Instances
-      run: az container delete --resource-group pauline-RG-Brief15 --name paulineContainerGroupPortfolio-dev --yes
+      run: az container delete --resource-group pauline-RG-Brief15 --name paulineContainerGroupPortfolio --yes
 
     - name: Deploy to Azure Container Instances
       run: az container create --resource-group pauline-RG-Brief15 --file deploy-aci.yaml
