@@ -36,8 +36,8 @@ def test():
 
 
 # Pour alimenter le chatbot avec les données du portfolio:
-# response = requests.get(FRONT_URL)
-# soup = BeautifulSoup(response.text, "html.parser")
+response = requests.get(FRONT_URL)
+soup = BeautifulSoup(response.text, "html.parser")
 
 
 # pour se connecter à l'API
@@ -46,7 +46,7 @@ async def chat(prompt):
     payload = {
         "providers": provider,
         "text": "",
-        "chatbot_global_action": f"Act as an professional assistant",  #  with this :{soup}",
+        "chatbot_global_action": f"Act as an professional assistant with this :{soup}",
         "previous_history": [],
         "temperature": 0.8,
         "max_tokens": 200,
