@@ -13,10 +13,10 @@ jobs:
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-        find: "password.key"
+        find: "passwordkey"
         replace: ${{ secrets.EDENAIKEY }}
         regex: false
-        include: 'config.py'
+        include: 'back/config.py'
 
     - name: Install dependencies
       run: |
