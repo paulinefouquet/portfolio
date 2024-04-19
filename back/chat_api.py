@@ -12,6 +12,7 @@ headers = {"Authorization": EDENAI_KEY}
 url = "https://api.edenai.run/v2/text/chat"
 provider = "openai"
 
+
 def handle_cors(app):
 
     app.add_middleware(
@@ -24,16 +25,20 @@ def handle_cors(app):
 
     return app
 
+
 app = handle_cors(FastAPI())
+
 
 # Pour tester l'API
 @app.get("/test/{prompt}", description="Test!")
 def test():
     return "test api OK"
 
+
 # Pour alimenter le chatbot avec les données du portfolio:
 response = requests.get(FRONT_URL)
 soup = BeautifulSoup(response.text, "html.parser")
+
 
 # pour se connecter à l'API
 @app.post("/chat/", description="output du chatbot")
