@@ -1,0 +1,44 @@
+# Ce fichier définit la configuration d'un groupe de conteneurs
+# avec des informations sur l'emplacement, les images des conteneurs, les ressources allouées et les ports exposés.
+# il est utilisé par .gihub/workflow pour instancier le groupe de conteneur dans azure
+
+apiVersion: 2023-05-01
+location: westeurope
+name: paulineContainerGroupPortfolio-dev
+properties:
+  imageRegistryCredentials:
+      - server: paulineregistreb15.azurecr.io
+        username: paulineregistreb15
+        password: password.registry
+        
+  containers:
+  - name: pauline-front-portfolio
+    properties:
+      image: paulineregistreb15.azurecr.io/front-portfolio-az-dev:latest
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 80
+  - name: pauline-back-chat
+    properties:
+      image: paulineregistreb15.azurecr.io/back-chat-az-dev:latest
+      ports:
+      - port: 8000
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+  osType: Linux
+  ipAddress:
+    type: Public
+    dnsNameLabel: staging-pauline-portfolio
+    ports:
+    - protocol: tcp
+      port: 80
+    - protocol: tcp
+      port: 8000
+
+tags: {exampleTag: pauline-portfolio-dev}
+type: Microsoft.ContainerInstance/containerGroups
