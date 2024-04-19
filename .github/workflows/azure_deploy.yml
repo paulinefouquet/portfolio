@@ -63,6 +63,14 @@ jobs:
       run: |
         az acr login --name paulineregistreb15
 
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: "passwordkey"
+          replace: ${{ secrets.EDENAIKEY }}
+          regex: true
+          include: 'back/config.py'
+
     - name: Build and push Docker images
       run: |
         docker build -t back-chat-az back/
