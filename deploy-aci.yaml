@@ -33,7 +33,7 @@ properties:
   osType: Linux
   ipAddress:
     type: Public
-    dnsNameLabel: staging-pauline-portfolio
+    dnsNameLabel: pauline-portfolio
     ports:
     - protocol: tcp
       port: 80
