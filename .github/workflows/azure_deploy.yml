@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "password.key"
+        replace: ${{ secrets.EDENAIKEY }}
+        regex: false
+        include: 'config.py'
 
     - name: Install dependencies
       run: |
