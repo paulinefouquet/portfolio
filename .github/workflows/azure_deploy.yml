@@ -8,15 +8,8 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
-
+        
     steps:
-    - name: Find and Replace
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "passwordkey"
-        replace: ${{ secrets.EDENAIKEY }}
-        regex: false
-        include: 'back/config.py'
 
     - name: Install dependencies
       run: |
@@ -33,6 +26,14 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.11"
+
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: "passwordkey"
+          replace: ${{ secrets.EDENAIKEY }}
+          regex: true
+          include: 'back/config.py'
 
     - name: Test backend with pytest
       run: |
