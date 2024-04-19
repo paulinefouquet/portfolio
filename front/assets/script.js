@@ -12,7 +12,7 @@ function addNewQuestion() {
     reponseEl.classList.add("chat-reponse");
     reponseEl.innerText = "...";
         
-    fetch('http://staging-pauline-portfolio:8000/chat/?prompt=' + prompt, {method: "POST"})
+    fetch('http://staging-pauline-portfolio.westeurope.azurecontainer.io/chat/?prompt=' + prompt, {method: "POST"})
     .then(response => {
       return response.json();
     })
