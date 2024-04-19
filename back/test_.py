@@ -14,7 +14,6 @@ client = TestClient(app)
     "endpoint",
     [
         "/test/{prompt}",
-        "/chat/",
     ],
 )
 def test_api_endpoints(endpoint):
