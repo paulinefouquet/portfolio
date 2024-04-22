@@ -18,5 +18,11 @@ function addNewQuestion() {
     })
     .then(data => {
       reponseEl.innerText = data;
-    })
+      document.getElementById("feedback").style.display = "block";
+    });
+}
+
+function sendFeedback(feedback) {
+  console.log("Feedback:", feedback);
+  document.getElementById("feedback").style.display = "none";
 }
