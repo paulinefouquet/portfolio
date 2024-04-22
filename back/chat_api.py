@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from openai import AzureOpenAI
 
 from config import AZURE_OPENAI_KEY, PORT, FRONT_URL, URL_CV_PDF
+from handle_pdf import extract_text_from_pdf
 
 
 def handle_cors(app):
@@ -33,16 +34,12 @@ def test():
 # Pour alimenter le chatbot avec les données du portfolio:
 response1 = requests.get(FRONT_URL)
 soup1 = BeautifulSoup(response1.text, "html.parser")
-
-# response2 = requests.get(URL_CV_PDF)
-# soup2 = BeautifulSoup(response2.text, "html.parser")
-
-# Extraire le contenu de chaque objet soup
 content1 = soup1.prettify()
-# content2 = soup2.prettify()
+
+text_from_pdf = extract_text_from_pdf(URL_CV_PDF)
 
 # Concaténer les contenus
-concatenated_content = content1  # + content2
+concatenated_content = content1 + text_from_pdf
 
 # Créer un nouvel objet BeautifulSoup avec le contenu concaténé
 soup = BeautifulSoup(concatenated_content, "html.parser")
