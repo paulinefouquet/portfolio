@@ -67,7 +67,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@v2
       with:
           find: "passwordkey"
-          replace: ${{ secrets.EDENAIKEY }}
+          replace: ${{ secrets.AZURE_OPENAI_KEY }}
           regex: true
           include: 'back/config.py'
 

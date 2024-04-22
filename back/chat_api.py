@@ -1,16 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-import json
 import requests
 from bs4 import BeautifulSoup
+from openai import AzureOpenAI
 
-from config import EDENAI_KEY, PORT, FRONT_URL
-
-# Pour que le chatbot fonctionne : il faut saisir une key de l'API EdenAI
-headers = {"Authorization": EDENAI_KEY}
-url = "https://api.edenai.run/v2/text/chat"
-provider = "openai"
+from config import AZURE_OPENAI_KEY, PORT, FRONT_URL
 
 
 def handle_cors(app):
@@ -43,24 +38,35 @@ soup = BeautifulSoup(response.text, "html.parser")
 # pour se connecter à l'API
 @app.post("/chat/", description="output du chatbot")
 async def chat(prompt):
-    payload = {
-        "providers": provider,
-        "text": "",
-        "chatbot_global_action": f"Act as an professional assistant with this :{soup}",
-        "previous_history": [],
-        "temperature": 0.8,
-        "max_tokens": 200,
-        "fallback_providers": "",
-    }
-    payload["text"] = prompt
 
-    response = requests.post(url, json=payload, headers=headers)
+    client = AzureOpenAI(
+        azure_endpoint="https://pauline-openai.openai.azure.com/",
+        api_key=AZURE_OPENAI_KEY,
+        api_version="2024-02-15-preview",
+    )
 
-    print(f"la question suivante a été posée: {prompt}")
+    message_text = [
+        {
+            "role": "system",
+            "content": f"You are a professionnal AI assistant who know this :{soup}.",
+        },
+        {"role": "user", "content": f"{prompt}"},
+    ]
 
-    result = json.loads(response.text)[provider]
-    print(f"le texte suivant a été généré: {result['generated_text']}")
-    return result["generated_text"]
+    completion = client.chat.completions.create(
+        model="paulinegpt4",  # model = "deployment_name"
+        messages=message_text,
+        temperature=0.7,
+        max_tokens=800,
+        top_p=0.95,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=None,
+    )
+    completion_text = completion.choices[0].message.content
+    print(f"le texte suivant a été généré: {completion_text}")
+
+    return completion_text
 
 
 if __name__ == "__main__":

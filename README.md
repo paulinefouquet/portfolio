@@ -1,3 +1,7 @@
 # portfolio
 
-ci cd en cours
+TODO :  
+feedbackloop
+test
+variable d'envrionnement url
+logging
