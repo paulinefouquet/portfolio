@@ -2,3 +2,5 @@
 __pycache__
 *.pyc
 Dockerfile
+test_.py
+requirements.txt
