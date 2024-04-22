@@ -34,15 +34,15 @@ def test():
 response1 = requests.get(FRONT_URL)
 soup1 = BeautifulSoup(response1.text, "html.parser")
 
-response2 = requests.get(URL_CV_PDF)
-soup2 = BeautifulSoup(response2.text, "html.parser")
+# response2 = requests.get(URL_CV_PDF)
+# soup2 = BeautifulSoup(response2.text, "html.parser")
 
 # Extraire le contenu de chaque objet soup
 content1 = soup1.prettify()
-content2 = soup2.prettify()
+# content2 = soup2.prettify()
 
 # Concaténer les contenus
-concatenated_content = content1 + content2
+concatenated_content = content1  # + content2
 
 # Créer un nouvel objet BeautifulSoup avec le contenu concaténé
 soup = BeautifulSoup(concatenated_content, "html.parser")
