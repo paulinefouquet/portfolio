@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from openai import AzureOpenAI
 
-from config import AZURE_OPENAI_KEY, PORT, FRONT_URL
+from config import AZURE_OPENAI_KEY, PORT, FRONT_URL, URL_CV_PDF
 
 
 def handle_cors(app):
@@ -31,8 +31,13 @@ def test():
 
 
 # Pour alimenter le chatbot avec les données du portfolio:
-response = requests.get(FRONT_URL)
-soup = BeautifulSoup(response.text, "html.parser")
+response1 = requests.get(FRONT_URL)
+soup1 = BeautifulSoup(response1.text, "html.parser")
+
+response2 = requests.get(URL_CV_PDF)
+soup2 = BeautifulSoup(response2.text, "html.parser")
+
+soup = soup1 + soup2
 
 
 # pour se connecter à l'API
