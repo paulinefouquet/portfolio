@@ -19,6 +19,7 @@ jobs:
         pip install uvicorn
         pip install httpx
         pip install beautifulsoup4
+        pip install openai
     
     - uses: actions/checkout@v4
 
