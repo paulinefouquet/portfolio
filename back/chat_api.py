@@ -4,9 +4,13 @@ import uvicorn
 import requests
 from bs4 import BeautifulSoup
 from openai import AzureOpenAI
+import logging
 
 from config import AZURE_OPENAI_KEY, PORT, FRONT_URL, URL_CV_PDF
 from handle_pdf import extract_text_from_pdf
+
+# Configuration du logger
+logging.basicConfig(filename="api.log", level=logging.INFO)
 
 
 def handle_cors(app):
@@ -49,6 +53,9 @@ soup = BeautifulSoup(concatenated_content, "html.parser")
 @app.post("/chat/", description="output du chatbot")
 async def chat(prompt):
 
+    # Enregistrement des paramètres d'entrée
+    logging.info(f"Paramètre d'entrée : {prompt}")
+
     client = AzureOpenAI(
         azure_endpoint="https://pauline-openai.openai.azure.com/",
         api_key=AZURE_OPENAI_KEY,
@@ -74,7 +81,7 @@ async def chat(prompt):
         stop=None,
     )
     completion_text = completion.choices[0].message.content
-    print(f"le texte suivant a été généré: {completion_text}")
+    logging.info(f"Paramètre de sortie : {completion_text}")
 
     return completion_text
 
