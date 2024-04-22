@@ -9,7 +9,3 @@ FRONT_URL = (
     if ENVIRONMENT == "dev"
     else "http://pauline-portfolio.westeurope.azurecontainer.io"
 )
-
-URL_CV_PDF = (
-    "https://drive.google.com/file/d/1n9OPn9PZDrXbHebV9eXkzbEpfKbpzt0-/view?usp=sharing"
-)

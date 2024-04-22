@@ -6,8 +6,7 @@ from bs4 import BeautifulSoup
 from openai import AzureOpenAI
 import logging
 
-from config import AZURE_OPENAI_KEY, PORT, FRONT_URL, URL_CV_PDF
-from handle_pdf import extract_text_from_pdf
+from config import AZURE_OPENAI_KEY, PORT, FRONT_URL
 
 # Configuration du logger
 logging.basicConfig(filename="api.log", level=logging.INFO)
@@ -36,17 +35,8 @@ def test():
 
 
 # Pour alimenter le chatbot avec les données du portfolio:
-response1 = requests.get(FRONT_URL)
-soup1 = BeautifulSoup(response1.text, "html.parser")
-content1 = soup1.prettify()
-
-text_from_pdf = extract_text_from_pdf(URL_CV_PDF)
-
-# Concaténer les contenus
-concatenated_content = content1 + text_from_pdf
-
-# Créer un nouvel objet BeautifulSoup avec le contenu concaténé
-soup = BeautifulSoup(concatenated_content, "html.parser")
+response = requests.get(FRONT_URL)
+soup = BeautifulSoup(response.text, "html.parser")
 
 
 # pour se connecter à l'API

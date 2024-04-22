@@ -3,5 +3,3 @@ uvicorn
 requests
 beautifulsoup4
 openai
-fitz
-PyMuPDF==1.18.16
