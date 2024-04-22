@@ -2,6 +2,6 @@
 
 TODO :  
 feedbackloop
-test
-variable d'envrionnement url
+tester les behaviours
+variable d'environnement url staging ou non
 logging
