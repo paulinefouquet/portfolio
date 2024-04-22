@@ -4,4 +4,4 @@ requests
 beautifulsoup4
 openai
 fitz
-PyMuPDF
+PyMuPDF==1.18.16
