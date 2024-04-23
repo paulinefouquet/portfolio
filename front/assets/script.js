@@ -21,8 +21,11 @@ function addNewQuestion() {
       document.getElementById("feedback").style.display = "block";
     });
 }
-
 function sendFeedback(feedback) {
   console.log("Feedback:", feedback);
+  fetch('http://staging-pauline-portfolio.westeurope.azurecontainer.io:8000/feedback/?feedback=' + feedback, {method: "POST"})
+  .catch(error => {
+    console.error('Error:', error);
+  });
   document.getElementById("feedback").style.display = "none";
 }

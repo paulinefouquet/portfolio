@@ -76,6 +76,24 @@ async def chat(prompt):
     return completion_text
 
 
+feedbacks = []
+
+
+@app.post("/feedback/", description="Recevoir le feedback de l'utilisateur")
+async def feedback(feedback: str):
+    logging.info(f"Feedback de l'utilisateur : {feedback}")
+    feedbacks.append(feedback)
+    return {"message": "Feedback enregistré avec succès!"}
+
+
+@app.get("/satisfaction/", description="Calculer le taux de satisfaction")
+async def satisfaction():
+    if len(feedbacks) == 0:
+        return {"satisfaction_rate": 0}
+    else:
+        satisfaction_rate = sum(feedbacks) / len(feedbacks)
+        return {"satisfaction_rate": satisfaction_rate}
+
+
 if __name__ == "__main__":
-    print("Launching the back-end...")
     uvicorn.run(app, host="0.0.0.0", port=PORT)

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="icon" href="https://fav.farm/👀" />
     <title>Portfolio Pauline</title>
   </head>
   
@@ -60,7 +61,7 @@
         </div> 
         
         <div id="chat-add">
-            Posez vos question à mon assistant &#128512
+            Posez vos questions à mon assistant IA &#128512
             <button onclick="addNewQuestion()">Envoyer</button>
         </div>
     </main>
@@ -70,10 +71,9 @@
     </footer>
 
     <div id="feedback">
-        <p>Comment évaluez-vous cette réponse ?</p>
-        <button onclick="sendFeedback('good')">😊</button>
-        <button onclick="sendFeedback('neutral')">😐</button>
-        <button onclick="sendFeedback('bad')">😞</button>
+        <p>Est ce que cette réponse est satisfaisante ?</p>
+        <button onclick="sendFeedback(1)">😊</button>
+        <button onclick="sendFeedback(0)">😞</button>
     </div>
 
     <script src="assets/script.js"></script>
