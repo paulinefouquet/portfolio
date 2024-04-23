@@ -38,6 +38,8 @@ def test():
 response = requests.get(FRONT_URL)
 soup = BeautifulSoup(response.text, "html.parser")
 
+feedbacks = []
+
 
 # pour se connecter à l'API
 @app.post("/chat/", description="output du chatbot")
@@ -74,9 +76,6 @@ async def chat(prompt):
     logging.info(f"Paramètre de sortie : {completion_text}")
 
     return completion_text
-
-
-feedbacks = []
 
 
 @app.post("/feedback/", description="Recevoir le feedback de l'utilisateur")
