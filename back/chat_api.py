@@ -79,7 +79,7 @@ async def chat(prompt):
 
 
 @app.post("/feedback/", description="Recevoir le feedback de l'utilisateur")
-async def feedback(feedback: str):
+async def feedback(feedback: int):
     logging.info(f"Feedback de l'utilisateur : {feedback}")
     feedbacks.append(feedback)
     return {"message": "Feedback enregistré avec succès!"}
