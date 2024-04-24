@@ -1,16 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-import json
 import requests
 from bs4 import BeautifulSoup
+from openai import AzureOpenAI
+import logging
 
-from config import EDENAI_KEY, PORT, FRONT_URL
+from config import AZURE_OPENAI_KEY, PORT, FRONT_URL
 
-# Pour que le chatbot fonctionne : il faut saisir une key de l'API EdenAI
-headers = {"Authorization": EDENAI_KEY}
-url = "https://api.edenai.run/v2/text/chat"
-provider = "openai"
+# Configuration du logger
+logging.basicConfig(filename="api.log", level=logging.INFO)
 
 
 def handle_cors(app):
@@ -39,30 +38,61 @@ def test():
 response = requests.get(FRONT_URL)
 soup = BeautifulSoup(response.text, "html.parser")
 
+feedbacks = []
+
 
 # pour se connecter à l'API
 @app.post("/chat/", description="output du chatbot")
 async def chat(prompt):
-    payload = {
-        "providers": provider,
-        "text": "",
-        "chatbot_global_action": f"Act as an professional assistant with this :{soup}",
-        "previous_history": [],
-        "temperature": 0.8,
-        "max_tokens": 200,
-        "fallback_providers": "",
-    }
-    payload["text"] = prompt
 
-    response = requests.post(url, json=payload, headers=headers)
+    # Enregistrement des paramètres d'entrée
+    logging.info(f"Paramètre d'entrée : {prompt}")
 
-    print(f"la question suivante a été posée: {prompt}")
+    client = AzureOpenAI(
+        azure_endpoint="https://pauline-openai.openai.azure.com/",
+        api_key=AZURE_OPENAI_KEY,
+        api_version="2024-02-15-preview",
+    )
 
-    result = json.loads(response.text)[provider]
-    print(f"le texte suivant a été généré: {result['generated_text']}")
-    return result["generated_text"]
+    message_text = [
+        {
+            "role": "system",
+            "content": f"You are a professionnal AI assistant who know this :{soup}.",
+        },
+        {"role": "user", "content": f"{prompt}"},
+    ]
+
+    completion = client.chat.completions.create(
+        model="paulinegpt4",  # model = "deployment_name"
+        messages=message_text,
+        temperature=0.7,
+        max_tokens=800,
+        top_p=0.95,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=None,
+    )
+    completion_text = completion.choices[0].message.content
+    logging.info(f"Paramètre de sortie : {completion_text}")
+
+    return completion_text
+
+
+@app.post("/feedback/", description="Recevoir le feedback de l'utilisateur")
+async def feedback(feedback: int):
+    logging.info(f"Feedback de l'utilisateur : {feedback}")
+    feedbacks.append(feedback)
+    return {"message": "Feedback enregistré avec succès!"}
+
+
+@app.get("/satisfaction/", description="Calculer le taux de satisfaction")
+async def satisfaction():
+    if len(feedbacks) == 0:
+        return {"satisfaction_rate": 0}
+    else:
+        satisfaction_rate = sum(feedbacks) / len(feedbacks)
+        return {"satisfaction_rate": satisfaction_rate}
 
 
 if __name__ == "__main__":
-    print("Launching the back-end...")
     uvicorn.run(app, host="0.0.0.0", port=PORT)

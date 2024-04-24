@@ -6,8 +6,6 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-# The requirements.txt file is small so we could write the dependencies
-# directly, like `pip install --no-cache-dir fastapi ...`
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .

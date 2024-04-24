@@ -1,118 +1,129 @@
 body {
-    background-color: black;
-    color: white;
-    font-family: 'Courier New', Courier, monospace
-    }
-
-a {color: white;}
-
-.titre {
-    color : rgb(13, 229, 81);
-    font-size: 50px ;
-    margin: 10px 200px 10px 50px;
-    border-bottom : dashed;
-    border-width: 10px;
-    }
-
-.italic {font-style: italic}
-
-.habitation {color: lightpink}
-
-.icone {
-    max-width : 100px;
-    height: auto;
-    border-radius: 20%;
-}
-
-a:hover{   -webkit-transform:scale(1.25); /* Safari and Chrome */
-    -moz-transform:scale(1.25); /* Firefox */
-    -ms-transform:scale(1.25); /* IE 9 */
-    -o-transform:scale(1.25); /* Opera */
-     transform:scale(1.25);}
-
-.maphoto {
-    max-width : 100px;
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  header, footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  header > div {
+    height: 50px;
+  }
+  
+  .titre {
+    color: rgb(13, 229, 81);
+    font-size: 2rem;
+    margin: 10px 0;
+    border-bottom: 2px dashed #333;
+    padding-bottom: 10px;
+  }
+  
+  .habitation {
+    color: #ff69b4;
+  }
+  
+  .topbox {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+  }
+  
+  .icone,
+  .maphoto {
+    max-width: 100px;
     height: auto;
     border-radius: 20%;
     margin-left: 30px;
-    }
-
-
-.topbox {justify-content: center;
-        display: flex;
-        padding: 30px
-      }
-
-.xp {padding: 0px 0px 0px 50px}
-
-header, footer{
-    display: flex;
-    justify-content: space-evenly;
-    font-family: sans-serif;
-    border-bottom: solid white;
-    margin: 5px;
-    padding: 5px;
-}
-
-header > div {
-    height: 50px;
-}
-
-
-
-/* .user-message {
-    background-color: #e0f7fa;
-    padding: 5px;
-    border-radius: 5px;
+  }
+  
+  .topbox .icone:hover,
+  .topbox .maphoto:hover {
+    transform: scale(1.1);
+  }
+  
+  .sstitre {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+  
+  .italic {
+    font-style: italic;
+  }
+  
+  .xp {
+    padding-left: 50px;
+  }
+  
+  #cv {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #cv .formation,
+  #cv .xp {
+    margin-bottom: 10px;
+  }
+  
+  #skills ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #skills li {
     margin-bottom: 5px;
-}
-
-.bot-message {
-    background-color: #f5f5f5;
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-input[type="text"] {
-    width: 80%;
-    padding: 5px;
-    margin-right: 5px;
-} */
-
-button {
-    padding: 5px;
-    cursor: pointer;
-}
-
-#chat-add {
+  }
+  
+  #chat-add {
     position: fixed;
+    bottom: 10px;
     right: 10px;
     width: 400px;
-    bottom : 10px;
-    margin-top: 10px;
-    text-align : left;
     padding: 10px;
-    border: 5px solid #ccc;
+    background-color: #333;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    background-color: rgb(13, 229, 81);;
-    }
+    color: #fff;
+    text-align: left;
+  }
+  
+  #chat-add button {
+    padding: 8px 15px;
+    background-color: rgb(13, 229, 81);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #chat-add button:hover {
+    background-color: #007bff;
+  }
 
-.chat-msg {border: 5px solid;
-    background-color: white;
-    color: black;}
-
-.chat-question {
-    border: 1px solid green;
-    text-align : left;
-    align-self: flex-end;    
-}
-
-.chat-reponse {
-    border: 1px solid yellow;
-    text-align : right;
-    align-self: flex-start;
-}
+  #feedback {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+  }
+  
+  #feedback p {
+    margin: 5px;
+  }
+  
+  #feedback button {
+    font-size: 1.5rem;
+    margin: 5px;
+    cursor: pointer;
+  }
