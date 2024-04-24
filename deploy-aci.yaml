@@ -33,12 +33,12 @@ properties:
   osType: Linux
   ipAddress:
     type: Public
-    dnsNameLabel: pauline-portfolio
+    dnsNameLabel: staging-pauline-portfolio
     ports:
     - protocol: tcp
       port: 80
     - protocol: tcp
       port: 8000
 
-tags: {exampleTag: pauline-portfolio-dev}
+tags: {envTag: pauline-portfolio-dev}
 type: Microsoft.ContainerInstance/containerGroups

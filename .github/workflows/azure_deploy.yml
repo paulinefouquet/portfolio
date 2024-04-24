@@ -1,9 +1,9 @@
 name: Azure Deployment
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - dev
 
 jobs:
   build-test:
