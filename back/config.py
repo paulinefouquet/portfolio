@@ -1,4 +1,4 @@
-ENVIRONMENT = "prod"
+ENVIRONMENT = "dev"
 
 # Saisissez votre Key obtenu sur le site edenai format "Bearer xxxxxxxxxxx...xxxx"
 # EDENAI_KEY = passwordkey
