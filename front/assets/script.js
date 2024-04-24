@@ -1,3 +1,5 @@
+var apiUrl = 'http://staging-pauline-portfolio.westeurope.azurecontainer.io:8000';
+
 function addNewQuestion() {
     let prompt = window.prompt("Quelle est ta question?")
     let chatBoxEl = document.getElementById("chat-add");
@@ -12,7 +14,7 @@ function addNewQuestion() {
     reponseEl.classList.add("chat-reponse");
     reponseEl.innerText = "...";
         
-    fetch('http://staging-pauline-portfolio.westeurope.azurecontainer.io:8000/chat/?prompt=' + prompt, {method: "POST"})
+    fetch(apiUrl + '/chat/?prompt=' + prompt, {method: "POST"})
     .then(response => {
       return response.json();
     })
@@ -23,7 +25,7 @@ function addNewQuestion() {
 }
 function sendFeedback(feedback) {
   console.log("Feedback:", feedback);
-  fetch('http://staging-pauline-portfolio.westeurope.azurecontainer.io:8000/feedback/?feedback=' + feedback, {method: "POST"})
+  fetch(apiUrl + '/feedback/?feedback=' + feedback, {method: "POST"})
   .catch(error => {
     console.error('Error:', error);
   });
