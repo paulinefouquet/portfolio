@@ -127,7 +127,7 @@ jobs:
         find: "password.registry"
         replace: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
         regex: false
-        include: 'deploy-aci.yaml'
+        include: 'deploy-aci-prod.yaml'
     
     - name: Delete Previous Same Container Instances
       run: az container delete --resource-group pauline-RG-Brief15 --name ProdPaulineContainerGroupPortfolio --yes
