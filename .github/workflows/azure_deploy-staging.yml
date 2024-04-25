@@ -93,4 +93,4 @@ jobs:
       run: az container delete --resource-group pauline-RG-Brief15 --name StagingPaulineContainerGroupPortfolio --yes
 
     - name: Deploy to Azure Container Instances
-      run: az container create --resource-group pauline-RG-Brief15 --file deploy-aci.yaml
+      run: az container create --resource-group pauline-RG-Brief15 --file deploy-aci-dev.yaml
