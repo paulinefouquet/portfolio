@@ -1,6 +1,7 @@
 import pytest
-from fastapi.testclient import TestClient
-from chat_api import app
+
+# from fastapi.testclient import TestClient
+# from chat_api import app
 
 
 def test_execution_test():
