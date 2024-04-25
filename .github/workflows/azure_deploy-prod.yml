@@ -4,9 +4,11 @@ on:
   pull_request:
     branches:
       - main
+    types: [closed]
 
 jobs:
   build-test:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
         
     steps:
@@ -85,13 +87,18 @@ jobs:
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
       with:
+          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io:8000'
+          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io:8000' 
+          regex: true
+          include: 'front/assets/script.js'
+
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
           find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
           replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
           regex: true
-          include: |
-            'front/assets/script.js'
-            'back/config.py'
-
+          include: 'back/config.py'
 
     - name: Build and push Docker images
       run: |
