@@ -39,26 +39,12 @@ jobs:
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-          find: "passwordkey"
-          replace: ${{ secrets.AZURE_OPENAI_KEY }}
-          regex: true
-          include: 'back/config.py'
-    
-    - name: Find and Replace
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
           find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
           replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
           regex: true
-          include: 'front/assets/script.js'
-
-    - name: Find and Replace
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
-          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
-          regex: true
-          include: 'back/config.py'
+          include: |
+            'front/assets/script.js'
+            'back/config.py'
 
     - name: Test backend with pytest
       run: |
@@ -102,15 +88,10 @@ jobs:
           find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
           replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
           regex: true
-          include: 'front/assets/script.js'
+          include: |
+            'front/assets/script.js'
+            'back/config.py'
 
-    - name: Find and Replace
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
-          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
-          regex: true
-          include: 'back/config.py'
 
     - name: Build and push Docker images
       run: |
