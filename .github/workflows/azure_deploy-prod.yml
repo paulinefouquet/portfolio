@@ -35,6 +35,30 @@ jobs:
           replace: ${{ secrets.AZURE_OPENAI_KEY }}
           regex: true
           include: 'back/config.py'
+    
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: "passwordkey"
+          replace: ${{ secrets.AZURE_OPENAI_KEY }}
+          regex: true
+          include: 'back/config.py'
+    
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
+          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
+          regex: true
+          include: 'front/assets/script.js'
+
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
+          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
+          regex: true
+          include: 'back/config.py'
 
     - name: Test backend with pytest
       run: |
@@ -71,15 +95,31 @@ jobs:
           replace: ${{ secrets.AZURE_OPENAI_KEY }}
           regex: true
           include: 'back/config.py'
+    
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
+          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
+          regex: true
+          include: 'front/assets/script.js'
+
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+          find: 'http://staging-pauline-portfolio.westeurope.azurecontainer.io'
+          replace: 'http://pauline-portfolio.westeurope.azurecontainer.io' 
+          regex: true
+          include: 'back/config.py'
 
     - name: Build and push Docker images
       run: |
         docker build -t back-chat-az back/
         docker build -t front-portfolio-az front/
-        docker tag back-chat-az paulineregistreb15.azurecr.io/back-chat-az-dev
-        docker tag front-portfolio-az paulineregistreb15.azurecr.io/front-portfolio-az-dev
-        docker push paulineregistreb15.azurecr.io/back-chat-az-dev
-        docker push paulineregistreb15.azurecr.io/front-portfolio-az-dev
+        docker tag back-chat-az paulineregistreb15.azurecr.io/back-chat-az
+        docker tag front-portfolio-az paulineregistreb15.azurecr.io/front-portfolio-az
+        docker push paulineregistreb15.azurecr.io/back-chat-az
+        docker push paulineregistreb15.azurecr.io/front-portfolio-az
     
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
@@ -87,10 +127,10 @@ jobs:
         find: "password.registry"
         replace: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
         regex: false
-        include: 'deploy-aci.yaml'
+        include: 'deploy-aci-prod.yaml'
     
     - name: Delete Previous Same Container Instances
-      run: az container delete --resource-group pauline-RG-Brief15 --name paulineContainerGroupPortfolio --yes
+      run: az container delete --resource-group pauline-RG-Brief15 --name ProdPaulineContainerGroupPortfolio --yes
 
     - name: Deploy to Azure Container Instances
-      run: az container create --resource-group pauline-RG-Brief15 --file deploy-aci.yaml
+      run: az container create --resource-group pauline-RG-Brief15 --file deploy-aci-prod.yaml

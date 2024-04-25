@@ -28,22 +28,22 @@ Le déploiement sur Azure est automatisé à l'aide d'un workflow GitHub.
 ### Structure des fichiers
 
 .
-├── .github/workflows/azure_deploy.yml
-├── back/
-│ ├── .dockerignore
-│ ├── chat_api.py
-│ ├── config.py
-│ ├── Dockerfile
-│ ├── requirements.txt
-│ └── test_.py
-├── front/
-│ ├── assets/
-| | ├── style.css
-│ │ └── script.js
-│ ├── Dockerfile
-│ └── index.html
-├── deploy-aci.yaml
-└── README.md
+├── .github/workflows/azure_deploy.yml  
+├── back/  
+│ ├── .dockerignore  
+│ ├── chat_api.py  
+│ ├── config.py  
+│ ├── Dockerfile  
+│ ├── requirements.txt  
+│ └── test_.py  
+├── front/  
+│ ├── assets/  
+| | ├── style.css  
+│ │ └── script.js  
+│ ├── Dockerfile  
+│ └── index.html  
+├── deploy-aci.yaml  
+└── README.md  
 
 
 ### Technologies utilisées
