@@ -6,7 +6,7 @@ Ce projet consiste en un portfolio personnel avec un chatbot intégré alimenté
 
 - Présentation des compétences en développement et en intelligence artificielle de Pauline.
 - Intégration d'un chatbot permettant aux visiteurs de poser des questions.
-- Collecte des feedbacks des utilisateurs sur les réponses du chatbot.
+- Feedback loop sur les réponses du chatbot.
 
 ## Déploiement
 
@@ -14,16 +14,15 @@ Le déploiement sur Azure est automatisé à l'aide d'un workflow GitHub.
 
 ### Prérequis
 
-- Compte Azure
 - Compte GitHub
+- Compte Azure
 
 ### Étapes de déploiement
 
 1. Cloner le projet depuis GitHub.
 2. Configurer les secrets GitHub pour l'accès à Azure et à l'API OpenAI.
-3. Pousser les modifications vers la branche `dev` pour déclencher le déploiement.
+3. Pousser les modifications vers la branche `dev` pour déclencher le déploiement de l'environnement staging.
 
-## Architecture du projet
 
 ### Structure des fichiers
 
@@ -52,3 +51,13 @@ Le déploiement sur Azure est automatisé à l'aide d'un workflow GitHub.
 - HTML, CSS, JavaScript pour le frontend
 - Azure Container Instances pour le déploiement des conteneurs Docker
 - Azure OpenAI pour le service de chatbot
+
+
+## Lien vers le site
+
+http://pauline-portfolio.westeurope.azurecontainer.io/  
+
+Pour obtenir le SLA du chatbot
+```
+curl -X GET http://pauline-portfolio.westeurope.azurecontainer.io/satisfaction
+```  
