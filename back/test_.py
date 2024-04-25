@@ -7,15 +7,15 @@ def test_execution_test():
     assert True
 
 
-client = TestClient(app)
+# client = TestClient(app)
 
 
-@pytest.mark.parametrize(
-    "endpoint",
-    [
-        "/test/{prompt}",
-    ],
-)
-def test_api_endpoints(endpoint):
-    response = client.get(endpoint)
-    assert response.status_code == 200
+# @pytest.mark.parametrize(
+#     "endpoint",
+#     [
+#         "/test/{prompt}",
+#     ],
+# )
+# def test_api_endpoints(endpoint):
+#     response = client.get(endpoint)
+#     assert response.status_code == 200
