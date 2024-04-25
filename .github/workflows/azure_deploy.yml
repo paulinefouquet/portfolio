@@ -74,10 +74,10 @@ jobs:
 
     - name: Build and push Docker images
       run: |
-        docker build -t back-chat-az back/
-        docker build -t front-portfolio-az front/
-        docker tag back-chat-az paulineregistreb15.azurecr.io/back-chat-az-dev
-        docker tag front-portfolio-az paulineregistreb15.azurecr.io/front-portfolio-az-dev
+        docker build -t back-chat-az-dev back/
+        docker build -t front-portfolio-az-dev front/
+        docker tag back-chat-az-dev paulineregistreb15.azurecr.io/back-chat-az-dev
+        docker tag front-portfolio-az-dev paulineregistreb15.azurecr.io/front-portfolio-az-dev
         docker push paulineregistreb15.azurecr.io/back-chat-az-dev
         docker push paulineregistreb15.azurecr.io/front-portfolio-az-dev
     
@@ -90,7 +90,7 @@ jobs:
         include: 'deploy-aci.yaml'
     
     - name: Delete Previous Same Container Instances
-      run: az container delete --resource-group pauline-RG-Brief15 --name paulineContainerGroupPortfolio --yes
+      run: az container delete --resource-group pauline-RG-Brief15 --name stagingPaulineContainerGroupPortfolio --yes
 
     - name: Deploy to Azure Container Instances
       run: az container create --resource-group pauline-RG-Brief15 --file deploy-aci.yaml

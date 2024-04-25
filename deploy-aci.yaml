@@ -4,7 +4,7 @@
 
 apiVersion: 2023-05-01
 location: westeurope
-name: paulineContainerGroupPortfolio
+name: stagingPaulineContainerGroupPortfolio
 properties:
   imageRegistryCredentials:
       - server: paulineregistreb15.azurecr.io
@@ -40,5 +40,5 @@ properties:
     - protocol: tcp
       port: 8000
 
-tags: {envTag: pauline-portfolio-dev}
+tags: {envTag: staging-pauline-portfolio}
 type: Microsoft.ContainerInstance/containerGroups
